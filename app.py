@@ -2,6 +2,7 @@ from flask import Flask, render_template, request
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+import os
 
 app = Flask(__name__)
 
@@ -25,8 +26,8 @@ def submit():
         return f"An error occurred: {str(e)}"
 
 def send_email(to_email, keyword, num_images):
-    from_email = 'your-email@gmail.com'
-    password = 'your-email-password'
+    from_email = os.getenv('FROM_EMAIL')  # Use environment variables
+    password = os.getenv('EMAIL_PASSWORD')  # Use environment variables
 
     msg = MIMEMultipart()
     msg['From'] = from_email
@@ -42,4 +43,4 @@ def send_email(to_email, keyword, num_images):
         server.sendmail(from_email, to_email, msg.as_string())
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=81)
+    app.run(host='0.0.0.0', port=8080)  # Changed to port 8080 for Vercel compatibility
