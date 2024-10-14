@@ -1,4 +1,8 @@
 {
+  "version": 2,
+  "env": {
+    "FLASK_ENV": "production"
+  },
   "routes": [
     {
       "src": "/(.*)",
