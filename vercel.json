@@ -3,6 +3,10 @@
     {
       "src": "/(.*)",
       "dest": "/$1"
+    },
+    {
+      "src": "/test",
+      "dest": "/index.html"
     }
   ]
 }
