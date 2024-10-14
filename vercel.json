@@ -1,12 +1,15 @@
 {
-  "routes": [
+  "routes":[
     {
-      "src": "/",
-      "dest": "/"
+    "src": "/",
+    "dest":"/"
+
     },
     {
       "src": "/test",
-      "dest": "/testpage"
+      "dest": "/"
     }
+
   ]
-}
+  }
+  
