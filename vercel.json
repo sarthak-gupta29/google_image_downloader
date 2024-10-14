@@ -1,16 +1,7 @@
 {
-  "version": 2,
-  "env": {
-    "FLASK_ENV": "production"
-  },
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    },
-    {
-      "src": "/test",
-      "dest": "/index.html"
+    "version": 2,
+    "env": {
+      "FLASK_ENV": "production"
     }
-  ]
-}
+  }
+  
