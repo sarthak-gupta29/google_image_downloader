@@ -1,4 +1,4 @@
 Flask
 gunicorn
-python-magic
+python-magic==0.4.27
 pygoogle_image
