@@ -4,24 +4,12 @@
     {
       "src": "app.py",
       "use": "@vercel/python"
-    },
-    {
-      "src": "templates/index.html",
-      "use": "@vercel/static-build"
     }
   ],
   "routes": [
     {
-      "src": "/submit",
-      "methods": ["POST"],
-      "dest": "/app.py"
-    },
-    {
       "src": "/(.*)",
-      "dest": "/"
+      "dest": "app.py"
     }
-  ],
-  "env": {
-    "FLASK_ENV": "production"
-  }
+  ]
 }
