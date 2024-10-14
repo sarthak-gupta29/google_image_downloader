@@ -4,81 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Image Downloader</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f4f7fc;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            height: 100vh;
-        }
-        .container {
-            background: #ffffff;
-            padding: 30px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            width: 400px;
-            text-align: center;
-        }
-        h1 {
-            color: #333;
-            font-size: 24px;
-        }
-        label {
-            font-size: 16px;
-            color: #555;
-            margin-bottom: 5px;
-            display: block;
-        }
-        input[type="text"], input[type="number"] {
-            width: 100%;
-            padding: 12px;
-            margin: 8px 0;
-            border-radius: 5px;
-            border: 1px solid #ddd;
-            font-size: 16px;
-        }
-        button {
-            background-color: #4CAF50;
-            color: white;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 5px;
-            width: 100%;
-            cursor: pointer;
-            font-size: 16px;
-            margin-top: 10px;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        /* Circular Loading Spinner */
-        .spinner {
-            border: 8px solid #f3f3f3; /* Light grey */
-            border-top: 8px solid #4CAF50; /* Green */
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 2s linear infinite;
-            margin: 20px auto;
-            display: none;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .footer {
-            margin-top: 20px;
-            font-size: 14px;
-            color: #888;
-        }
-    </style>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
@@ -86,17 +12,12 @@
         <form id="downloadForm" action="/submit" method="POST">
             <label for="keyword">Search Keyword:</label>
             <input type="text" name="keyword" required placeholder="Enter search keyword">
-
             <label for="num_images">Number of Images:</label>
             <input type="number" name="num_images" required placeholder="Enter number of images">
-
             <button type="submit" id="submitButton">Download Images</button>
         </form>
 
-        <!-- Circular Loading Spinner -->
         <div class="spinner" id="loadingSpinner"></div>
-
-        <!-- Success Message -->
         <div id="message"></div>
     </div>
     
@@ -104,30 +25,6 @@
         <p>Developed by Aakriti and Sarthak</p>
     </div>
 
-    <script>
-        const form = document.getElementById("downloadForm");
-        const spinner = document.getElementById("loadingSpinner");
-        const messageDiv = document.getElementById("message");
-
-        form.onsubmit = function(event) {
-            event.preventDefault();  // Prevent the default form submission
-            spinner.style.display = "block";  // Show the spinner
-
-            const formData = new FormData(form);
-            fetch("/submit", {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                spinner.style.display = "none";  // Hide the spinner
-                messageDiv.innerHTML = data.message;  // Display success message
-            })
-            .catch(error => {
-                spinner.style.display = "none";  // Hide the spinner if there's an error
-                messageDiv.innerHTML = "Error occurred while downloading images.";
-            });
-        };
-    </script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
