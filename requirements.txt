@@ -1,4 +1,4 @@
-Flask==3.3.0
-gunicorn==20.1.0
-python-magic==0.4.20
-pygoogle_image==1.0.0
+Flask
+gunicorn
+python-magic
+pygoogle_image
