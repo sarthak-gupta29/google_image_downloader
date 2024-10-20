@@ -91,8 +91,8 @@ Contributions, issues, and feature requests are welcome! Feel free to check [iss
 
 ## 👨‍💻👩‍💻 Authors
 
-- **Aakriti** - [[GitHub Profile](https://github.com/aakriti-username)](https://github.com/aakriti-jaluria)
-- **Sarthak** - [[GitHub Profile](https://github.com/sarthak-username)](https://github.com/sarthak-gupta29)
+- **Aakriti** - [[GitHub Profile](https://github.com/aakriti-jaluria)]
+- **Sarthak** - [[GitHub Profile](https://github.com/sarthak-gupta29)]
 
 ## 📄 License
 
