@@ -3,25 +3,37 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Image Downloader</title>
+    <title>Pexels Image Downloader</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
     <div class="container">
-        <h1>Image Downloader</h1>
-        <form id="downloadForm" action="/submit" method="POST">
-            <label for="keyword">Search Keyword:</label>
-            <input type="text" name="keyword" required placeholder="Enter search keyword">
-            <label for="num_images">Number of Images:</label>
-            <input type="number" name="num_images" required placeholder="Enter number of images">
-            <button type="submit" id="submitButton">Download Images</button>
-        </form>
-        <div class="spinner" id="loadingSpinner"></div>
-        <div id="message"></div>
+        <header>
+            <h1>Pexels Image Downloader</h1>
+            <p>Download high-quality images from Pexels with ease</p>
+        </header>
+        <main>
+            <form id="downloadForm" action="/submit" method="POST">
+                <div class="input-group">
+                    <label for="keyword">Search Keyword:</label>
+                    <input type="text" id="keyword" name="keyword" required placeholder="e.g., nature, city, animals">
+                </div>
+                <div class="input-group">
+                    <label for="num_images">Number of Images:</label>
+                    <input type="number" id="num_images" name="num_images" required min="1" max="200" placeholder="1-200">
+                </div>
+                <button type="submit" id="submitButton">
+                    <span class="button-text">Download Images</span>
+                    <span class="spinner"></span>
+                </button>
+            </form>
+            <div id="message" class="message"></div>
+        </main>
     </div>
-    <div class="footer">
-        <p>Developed by Aakriti and Sarthak</p>
-    </div>
+    <footer>
+        <p>Developed by Aakriti and Sarthak | Powered by Pexels API</p>
+    </footer>
     <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
 </html>
