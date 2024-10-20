@@ -12,6 +12,9 @@
       "dest": "app.py"
     }
   ],
+  "env": {
+    "PEXELS_API_KEY": "@pexels-api-key"
+  },
   "engines": {
     "python": "3.12.3"
   },
