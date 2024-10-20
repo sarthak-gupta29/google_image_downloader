@@ -14,5 +14,6 @@
   ],
   "engines": {
     "python": "3.12.3"
-  }
+  },
+  "installCommand": "pip install -r requirements.txt"
 }
