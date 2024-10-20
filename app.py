@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, send_file
 import os
+import zipfile
 from dotenv import load_dotenv
 import requests
 
@@ -33,14 +34,25 @@ def submit():
         data = response.json()
         photos = data['photos']
 
-        # Download each photo
+        # Download each photo and save locally
         for photo in photos:
             photo_url = photo['src']['medium']  # Use 'medium' size for example
             img_response = requests.get(photo_url)
             with open(os.path.join('./downloads', f"{photo['id']}.jpg"), 'wb') as f:
                 f.write(img_response.content)
 
+        # Check if the application is running on a server
+        if os.environ.get('SERVER_ENV', 'local') == 'production':
+            # Create a zip file of the downloaded images
+            zip_filename = './downloads/images.zip'
+            with zipfile.ZipFile(zip_filename, 'w') as zipf:
+                for photo in photos:
+                    zipf.write(os.path.join('./downloads', f"{photo['id']}.jpg"), arcname=f"{photo['id']}.jpg")
+
+            return send_file(zip_filename, as_attachment=True)
+
         return jsonify({"message": f"Successfully downloaded {num_images} images for '{keyword}'."})
+        
     except Exception as e:
         return jsonify({"message": f"Error: {str(e)}"})
 
