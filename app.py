@@ -25,8 +25,8 @@ def submit():
         'Authorization': PEXELS_API_KEY
     }
 
-    # Create a BytesIO object to hold the zip file
-    zip_buffer = io.BytesIO()
+    # Determine if we're running locally or on a server
+    is_local = os.getenv('FLASK_ENV') == 'development'
 
     try:
         # Fetch photos from Pexels
@@ -34,39 +34,40 @@ def submit():
         data = response.json()
         photos = data['photos']
 
-        if not photos:
-            return jsonify({"message": "No images found."})
+        if is_local:
+            # Ensure the 'downloads' directory exists
+            if not os.path.exists('./downloads'):
+                os.makedirs('./downloads')
 
-        # Create a zip file
-        with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+            # Download each photo locally
             for photo in photos:
                 photo_url = photo['src']['medium']  # Use 'medium' size for example
                 img_response = requests.get(photo_url)
-
-                # Write the image to the zip file
-                zip_file.writestr(f"{photo['id']}.jpg", img_response.content)
-
-        zip_buffer.seek(0)  # Move to the beginning of the BytesIO buffer
-
-        # Check if running locally or on Vercel
-        if os.getenv('SERVER_ENV') == 'local':
-            # Save images locally (optional, not necessary since we are using a zip)
-            downloads_dir = './downloads'
-            if not os.path.exists(downloads_dir):
-                os.makedirs(downloads_dir)
-            for photo in photos:
-                photo_url = photo['src']['medium']  # Use 'medium' size for example
-                img_response = requests.get(photo_url)
-                with open(os.path.join(downloads_dir, f"{photo['id']}.jpg"), 'wb') as f:
+                with open(os.path.join('./downloads', f"{photo['id']}.jpg"), 'wb') as f:
                     f.write(img_response.content)
 
             return jsonify({"message": f"Successfully downloaded {num_images} images for '{keyword}'."})
         else:
-            # Return the zip file for download
-            return send_file(zip_buffer, as_attachment=True, download_name=f"{keyword}_images.zip")
+            # Create a zip file in memory
+            zip_buffer = io.BytesIO()
+            with zipfile.ZipFile(zip_buffer, 'w') as zip_file:
+                for photo in photos:
+                    photo_url = photo['src']['medium']
+                    img_response = requests.get(photo_url)
+                    zip_file.writestr(f"{photo['id']}.jpg", img_response.content)
+
+            zip_buffer.seek(0)
+
+            # Send the zip file for download
+            return send_file(
+                zip_buffer,
+                mimetype='application/zip',
+                as_attachment=True,
+                download_name=f"{keyword}_images.zip"
+            )
 
     except Exception as e:
-        return jsonify({"message": f"Error: {str(e)}"})
+        return jsonify({"message": f"Error: {str(e)}"}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
