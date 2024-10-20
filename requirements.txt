@@ -1,4 +1,4 @@
 Flask==3.0.3
 gunicorn==23.0.0
-# python-magic==0.4.14
-pygoogle_image
+python-magic==0.4.15
+pygoogle_image==1.0.0
