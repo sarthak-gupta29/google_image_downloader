@@ -37,7 +37,7 @@ To get this project up and running on your local machine, follow these steps:
 
 1. Clone the repository:
    ```
-   git clone https://github.com/your-username/pexels-image-downloader.git
+   git clone https://github.com/sarthak-gupta29/google_image_downloader
    ```
 
 2. Navigate to the project directory:
@@ -94,10 +94,6 @@ Contributions, issues, and feature requests are welcome! Feel free to check [iss
 - **Aakriti** - [[GitHub Profile](https://github.com/aakriti-jaluria)]
 - **Sarthak** - [[GitHub Profile](https://github.com/sarthak-gupta29)]
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 🙏 Acknowledgements
 
 - [Pexels](https://www.pexels.com/) for providing the amazing API and images
@@ -106,4 +102,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ---
 
-⭐️ From [Aakriti and Sarthak](https://github.com/your-username)
